@@ -10,9 +10,19 @@ import 'rxjs/add/operator/map';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	title = 'app';
+	answer: string = '';
+	answerDisplay: string = '';
+	showSpinner: boolean = false;
 
 	constructor() { }
+
+	showAnswer() {
+		this.showSpinner = true;
+		setTimeout(() => {
+			this.answerDisplay = this.answer;
+			this.showSpinner = false;
+		}, 2000);
+	}
 
 	ngOnInit() { }
 

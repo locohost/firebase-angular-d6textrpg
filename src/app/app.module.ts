@@ -14,6 +14,10 @@ import { SuperSecretComponent } from './super-secret/super-secret.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -23,6 +27,9 @@ import { SubscriberPageComponent } from './subscriber-page/subscriber-page.compo
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
+		MaterialModule,
+		FormsModule,
 		AppRoutingModule,
 		CoreModule,
 		AngularFireModule.initializeApp(environment.firebaseConfig),
