@@ -18,14 +18,13 @@ export class SubscriberPageComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.postRef = this.afs.doc('posts/myTestPost');
+		this.postRef = this.afs.doc('/posts/xmR7ZqMldO0VrOAiBq3F');
 		this.post$ = this.postRef.valueChanges();
 	}
 
 	editPost() {
 		this.postRef.update({ title: 'Edited Title!' });
 	}
-
 
 	deletePost() {
 		this.postRef.delete();
