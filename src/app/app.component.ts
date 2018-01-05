@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
 	constructor() { }
 
 	showAnswer() {
+		this.answerDisplay = '';
 		this.showSpinner = true;
 		setTimeout(() => {
 			this.answerDisplay = this.answer;
