@@ -1,21 +1,21 @@
 import { Base } from './base.model';
 import { Building } from './building.model';
+import { Node } from './node.model';
 import { Region } from './region.model';
 import { AreaType  } from '../enum/all.enum';
 
 export class Area extends Base {
-
-	buildings: Building[];
-	region: Region;
 	type: AreaType;
+	buildings: Building[];
+	nodes: Node[];
 	coverIdx: number;
 	elevation: number;
 
 	constructor(data = null) {
 		super(data);
-		this.buildings = (data && data.buildings ? data.buildings : []);
-		this.region = (data && data.region ? data.region : null);
 		this.type = (data && data.type ? data.type : AreaType.Unknown);
+		this.buildings = (data && data.buildings ? data.buildings : []);
+		this.nodes = (data && data.nodes ? data.nodes : []);
 		this.coverIdx = (data && data.coverIdx ? data.coverIdx : 0);
 		this.elevation = (data && data.elevation ? data.elevation : 0);
 	}
@@ -45,12 +45,21 @@ export class Area extends Base {
 	}
 
 	docify(): any {
-		const data = super.docify();
-		data.buildings = this.buildings;
-		data.region = this.region;
-		data.coverIdx = this.coverIdx;
-		data.elevation = this.elevation;
-		return data;
+		const nodes: string[] = [];
+		this.nodes.forEach(node => {
+			nodes.push(node.docify());
+		});
+		const buildings: string[] = [];
+		this.buildings.forEach(building => {
+			buildings.push(building.docify());
+		});
+		const doc = super.docify();
+		doc.type = this.type;
+		doc.buildings = buildings;
+		doc.nodes = nodes;
+		doc.coverIdx = this.coverIdx;
+		doc.elevation = this.elevation;
+		return doc;
 	}
 
 }

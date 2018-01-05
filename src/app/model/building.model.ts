@@ -5,9 +5,9 @@ import { BuildingType  } from '../enum/all.enum';
 
 export class Building extends Base {
 
+	type: BuildingType;
 	area: Area;
 	rooms: Room[];
-	type: BuildingType;
 
 	constructor(data = null) {
 		super(data);
@@ -41,9 +41,14 @@ export class Building extends Base {
 	}
 
 	docify(): any {
+		const rooms: string[] = [];
+		this.rooms.forEach(room => {
+			rooms.push(room.docify());
+		});
 		const data = super.docify();
-		data.area = this.area;
-		data.rooms = this.rooms;
+		data.areaUID = this.area.uid;
+		data.areaName = this.area.name;
+		data.rooms = rooms;
 		data.type = this.type;
 		return data;
 	}

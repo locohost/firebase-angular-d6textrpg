@@ -1,6 +1,7 @@
-export class Room {
-	uid: string;
-	handle: string;
-	email: string;
-	photoURL: string;
+import { Base } from './base.model';
+import { Node } from './node.model';
+
+export class Room extends Base {
+	nodes: Node[];
 }
+
