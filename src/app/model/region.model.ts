@@ -54,7 +54,7 @@ export class Region extends Base {
 		});
 		const doc = super.docify();
 		doc.type = this.type;
-		doc.worldId = this.world.uid;
+		doc.worldUID = this.world.uid;
 		doc.worldName = this.world.name;
 		doc.areas = areas;
 		doc.inhabitants = this.inhabitants;

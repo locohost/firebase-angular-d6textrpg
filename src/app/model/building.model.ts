@@ -11,9 +11,9 @@ export class Building extends Base {
 
 	constructor(data = null) {
 		super(data);
-		this.area = (data && data.area ? data.area : null);
-		this.rooms = (data && data.rooms ? data.rooms : null);
 		this.type = (data && data.type ? data.type : BuildingType.Unknown);
+		this.area = (data && data.area ? data.area : null);
+		this.rooms = (data && data.rooms ? data.rooms : []);
 	}
 
 	static validate(model: Building): string[] {
@@ -46,10 +46,10 @@ export class Building extends Base {
 			rooms.push(room.docify());
 		});
 		const data = super.docify();
-		data.areaUID = this.area.uid;
-		data.areaName = this.area.name;
-		data.rooms = rooms;
 		data.type = this.type;
+		data.areaUID = (!!this.area ? this.area.uid : '');
+		data.areaName = (!!this.area ? this.area.name : '');
+		data.rooms = rooms;
 		return data;
 	}
 

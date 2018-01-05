@@ -6,6 +6,7 @@ import { AreaType  } from '../enum/all.enum';
 
 export class Area extends Base {
 	type: AreaType;
+	region: Region;
 	buildings: Building[];
 	nodes: Node[];
 	coverIdx: number;
@@ -14,6 +15,7 @@ export class Area extends Base {
 	constructor(data = null) {
 		super(data);
 		this.type = (data && data.type ? data.type : AreaType.Unknown);
+		this.region = (data && data.region ? data.region : null);
 		this.buildings = (data && data.buildings ? data.buildings : []);
 		this.nodes = (data && data.nodes ? data.nodes : []);
 		this.coverIdx = (data && data.coverIdx ? data.coverIdx : 0);
@@ -55,6 +57,8 @@ export class Area extends Base {
 		});
 		const doc = super.docify();
 		doc.type = this.type;
+		doc.regionUID = (!!this.region ? this.region.uid : '');
+		doc.regionName = (!!this.region ? this.region.name : '');
 		doc.buildings = buildings;
 		doc.nodes = nodes;
 		doc.coverIdx = this.coverIdx;
