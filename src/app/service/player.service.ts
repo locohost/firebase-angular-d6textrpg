@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Player } from '../model/player.model';
+import { Player } from '../interface/player';
 
 @Injectable()
 export class PlayerService {
@@ -53,7 +53,9 @@ export class PlayerService {
 	}
 
 	delete(model: Player): Promise<Player> {
-		model.softDelete();
+		model.deleted = true;
+		model.deletedOn = new Date();
+		model.deletedBy = 'WebUI';
 		return this.update(model);
 	}
 
