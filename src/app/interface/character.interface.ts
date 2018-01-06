@@ -1,5 +1,5 @@
-import { CharNPCBase } from './char-npc-base';
-import { Player } from './player';
+import { CharNPCBase } from './char-npc-base.interface';
+import { Player } from './player.interface';
 
 export interface Character extends CharNPCBase {
 	player: Player;

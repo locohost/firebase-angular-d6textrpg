@@ -1,5 +1,5 @@
-import { Base } from './base';
-import { Character } from './character';
+import { Base } from './base.interface';
+import { Character } from './character.interface';
 
 export interface Player extends Base {
 	userUID: string;

@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Spell } from './spell';
-import { DieRoll } from './die-roll';
+import { Base } from './base.interface';
+import { Spell } from './spell.interface';
+import { DieRoll } from './die-roll.interface';
 import { EffectType, Facing } from '../enum/all.enum';
 
 export interface Effect extends Base {

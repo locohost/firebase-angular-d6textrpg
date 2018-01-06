@@ -1,7 +1,7 @@
-import { Base } from './base';
-import { Spell } from './spell';
-import { Item } from './item';
-import { Coins } from './coins';
+import { Base } from './base.interface';
+import { Spell } from './spell.interface';
+import { Item } from './item.interface';
+import { Coins } from './coins.interface';
 import { RewardType, CharReputation } from '../enum/all.enum';
 
 export interface Reward extends Base {

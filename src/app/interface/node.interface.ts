@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { NodeReward } from './node-reward';
-import { NodeHazard } from './node-hazard';
+import { Base } from './base.interface';
+import { NodeReward } from './node-reward.interface';
+import { NodeHazard } from './node-hazard.interface';
 import { NodeType } from '../enum/all.enum';
 
 export interface Node extends Base {

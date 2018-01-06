@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Player } from './player';
-import { Comment } from './comment';
+import { Base } from './base.interface';
+import { Player } from './player.interface';
+import { Comment } from './comment.interface';
 
 export interface Article extends Base {
 	body: string;

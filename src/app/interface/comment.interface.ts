@@ -1,5 +1,5 @@
-import { Base } from './base';
-import { Player } from './player';
+import { Base } from './base.interface';
+import { Player } from './player.interface';
 
 export interface Comment extends Base {
 	author: Player;

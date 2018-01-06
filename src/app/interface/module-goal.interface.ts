@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Module } from './module';
-import { Reward } from './reward';
+import { Base } from './base.interface';
+import { Module } from './module.interface';
+import { Reward } from './reward.interface';
 import { ModuleGoalType } from '../enum/all.enum';
 
 export interface ModuleGoal extends Base {

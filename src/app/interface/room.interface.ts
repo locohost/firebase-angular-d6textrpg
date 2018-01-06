@@ -1,5 +1,5 @@
-import { Base } from './base';
-import { Node } from './node';
+import { Base } from './base.interface';
+import { Node } from './node.interface';
 
 export interface Room extends Base {
 	nodes: Node[];

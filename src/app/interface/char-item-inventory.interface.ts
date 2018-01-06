@@ -1,8 +1,8 @@
-import { Item } from './item';
-import { Character } from './character';
-import { Building } from './building';
-import { Room } from './room';
-import { Node } from './node';
+import { Item } from './item.interface';
+import { Character } from './character.interface';
+import { Building } from './building.interface';
+import { Room } from './room.interface';
+import { Node } from './node.interface';
 
 export interface CharItemInventory {
 	item: Item;

@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Player } from '../interface/player';
+import { Player } from '../interface/player.interface';
 
 @Injectable()
 export class PlayerService {

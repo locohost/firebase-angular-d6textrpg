@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Item } from './item';
-import { Effect } from './effect';
+import { Base } from './base.interface';
+import { Item } from './item.interface';
+import { Effect } from './effect.interface';
 import { HazardType } from '../enum/all.enum';
 
 export interface Hazard extends Base {

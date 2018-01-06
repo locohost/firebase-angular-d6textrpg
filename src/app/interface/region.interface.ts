@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { World } from './world';
-import { Area } from './area';
+import { Base } from './base.interface';
+import { World } from './world.interface';
+import { Area } from './area.interface';
 import { RegionType } from '../enum/all.enum';
 
 export interface Region extends Base {

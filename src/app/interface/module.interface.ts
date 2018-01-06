@@ -1,7 +1,7 @@
-import { Base } from './base';
-import { World } from './world';
-import { Player } from './player';
-import { ModuleGoal } from './module-goal';
+import { Base } from './base.interface';
+import { World } from './world.interface';
+import { Player } from './player.interface';
+import { ModuleGoal } from './module-goal.interface';
 import { ModuleType } from '../enum/all.enum';
 
 export interface Module extends Base {

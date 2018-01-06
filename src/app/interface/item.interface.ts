@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Coins } from './coins';
-import { Size } from './size';
+import { Base } from './base.interface';
+import { Coins } from './coins.interface';
+import { Size } from './size.interface';
 import { ItemType, Encumberance } from '../enum/all.enum';
 
 export interface Item extends Base {

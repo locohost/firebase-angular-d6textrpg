@@ -1,4 +1,4 @@
-import { Base } from './base';
+import { Base } from './base.interface';
 import { LogType } from '../enum/all.enum';
 
 export interface Log {

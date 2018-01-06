@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Area } from './area';
-import { Room } from './room';
+import { Base } from './base.interface';
+import { Area } from './area.interface';
+import { Room } from './room.interface';
 import { BuildingType  } from '../enum/all.enum';
 
 export interface Building extends Base {

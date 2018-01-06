@@ -1,4 +1,4 @@
-import { Region } from './region';
+import { Region } from './region.interface';
 import { CharReputation } from '../enum/all.enum';
 
 export interface CharRepRegion {

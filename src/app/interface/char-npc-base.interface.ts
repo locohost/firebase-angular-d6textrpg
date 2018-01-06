@@ -1,10 +1,10 @@
-import { Base } from './base';
-import { CharRepRegion } from './char-rep-region';
-import { CharRepArea } from './char-rep-area';
-import { CharRepBuilding } from './char-rep-building';
-import { CharItemCarrying } from './char-item-carrying';
-import { CharItemInventory } from './char-item-inventory';
-import { Effect } from './effect';
+import { Base } from './base.interface';
+import { CharRepRegion } from './char-rep-region.interface';
+import { CharRepArea } from './char-rep-area.interface';
+import { CharRepBuilding } from './char-rep-building.interface';
+import { CharItemCarrying } from './char-item-carrying.interface';
+import { CharItemInventory } from './char-item-inventory.interface';
+import { Effect } from './effect.interface';
 import { Facing, CharNPCLang, CharNPCAlign, CharNPCClass, CharNPCRace, CharNPCSize } from '../enum/all.enum';
 
 export interface CharNPCBase extends Base {
