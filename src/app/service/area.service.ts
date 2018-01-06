@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { Area } from '../model/area.model';
+import { Area } from '../interface/area.interface';
 
 @Injectable()
 export class AreaService {
