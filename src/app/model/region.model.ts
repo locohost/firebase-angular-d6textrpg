@@ -28,25 +28,6 @@ export class Region extends Base {
 		return errors;
 	}
 
-	static create(model: Region): string[] {
-		// Add code to create and save here...
-		return Region.validate(model);
-	}
-
-	static readById(id: string): Region {
-		const region = new Region({});
-		return region;
-	}
-
-	static update(model: Region): string[] {
-		// Add code to update and save here...
-		return Region.validate(model);
-	}
-
-	static delete(id: string)  {
-		// Add code to mark deleted here...
-	}
-
 	docify(): any {
 		const areas: string[] = [];
 		this.areas.forEach(area => {
@@ -54,8 +35,8 @@ export class Region extends Base {
 		});
 		const doc = super.docify();
 		doc.type = this.type;
-		doc.worldUID = this.world.uid;
-		doc.worldName = this.world.name;
+		doc.worldUID = (!!this.world ? this.world.uid : '');
+		doc.worldName = (!!this.world ? this.world.name : '');
 		doc.areas = areas;
 		doc.inhabitants = this.inhabitants;
 		doc.economy = this.economy;

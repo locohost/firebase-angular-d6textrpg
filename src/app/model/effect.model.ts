@@ -68,25 +68,6 @@ export class Effect extends Base {
 		// TODO: Add code to apply this effect to the player...
 	}
 
-	static create(model: Effect): string[] {
-		// Add code to create and save here...
-		return Effect.validate(model);
-	}
-
-	static readById(id: string): Effect {
-		const effect = new Effect();
-		return effect;
-	}
-
-	static update(model: Effect): string[] {
-		// Add code to update and save here...
-		return Effect.validate(model);
-	}
-
-	static delete(id: string) {
-		// Add code to mark deleted here...
-	}
-
 	docify(): any {
 		const data = super.docify();
 		data.type = this.type;

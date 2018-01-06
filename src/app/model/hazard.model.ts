@@ -36,25 +36,6 @@ export class Hazard extends Base {
 		});
 	}
 
-	static create(model: Hazard): string[] {
-		// Add code to create and save here...
-		return Hazard.validate(model);
-	}
-
-	static readById(id: string): Hazard {
-		const hazard = new Hazard();
-		return hazard;
-	}
-
-	static update(model: Hazard): string[] {
-		// Add code to update and save here...
-		return Hazard.validate(model);
-	}
-
-	static delete(id: string)  {
-		// Add code to mark deleted here...
-	}
-
 	docify(): any {
 		const data = super.docify();
 		data.type = this.type;

@@ -47,28 +47,8 @@ export class Item extends Base {
 	static putItemInside(container: Item, item: Item): string[] {
 		if (container.isContainer) {
 			container.contains.push(item);
-			return Item.update(container);
 		}
 		return [ container.name + ' is not a container' ];
-	}
-
-	static create(model: Item): string[] {
-		// Add code to create and save here...
-		return Item.validate(model);
-	}
-
-	static readById(id: string): Item {
-		const item = new Item();
-		return item;
-	}
-
-	static update(model: Item): string[] {
-		// Add code to update and save here...
-		return Item.validate(model);
-	}
-
-	static delete(id: string) {
-		// Add code to mark deleted here...
 	}
 
 	docify(): any {

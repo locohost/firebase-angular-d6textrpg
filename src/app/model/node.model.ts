@@ -3,10 +3,64 @@ import { Reward } from './reward.model';
 import { Hazard } from './hazard.model';
 import { NodeType } from '../enum/all.enum';
 
-export class Node extends Base {
+export class NodeRewardHazardBase {
+	triggerWords: string[];
+	triggerDescription: string;
+	triggerSoundUrl: string;
 
+	constructor(data) {
+		this.triggerWords = (data.triggerWords || []);
+		this.triggerDescription = (data.triggerDescription || '');
+		this.triggerSoundUrl = (data.triggerSoundUrl || '');
+	}
+
+	docify(): any {
+		return {
+			triggerWords: this.triggerWords,
+			triggerDescription: this.triggerDescription,
+			triggerSoundUrl: this.triggerSoundUrl
+		};
+	}
+
+} // end class NodeRewardHazardBase
+
+export class NodeReward extends NodeRewardHazardBase {
+	reward: Reward;
+
+	constructor(data) {
+		super(data);
+		this.reward = (data.reward || null);
+	}
+
+	docify(): any {
+		const doc = super.docify();
+		doc.rewardUID = (!!this.reward ? this.reward.uid : '');
+		doc.rewardName = (!!this.reward ? this.reward.name : '');
+		return doc;
+	}
+
+} // end class NodeReward
+
+export class NodeHazard extends NodeRewardHazardBase {
+	hazard: Hazard;
+
+	constructor(data) {
+		super(data);
+		this.hazard = (data.hazard || null);
+	}
+
+	docify(): any {
+		const doc = super.docify();
+		doc.hazardUID = (!!this.hazard ? this.hazard.uid : '');
+		doc.hazardName = (!!this.hazard ? this.hazard.name : '');
+		return doc;
+	}
+
+} // end class NodeHazard
+
+export class Node extends Base {
 	type: NodeType;
-	appearance: {
+	looking: {
 		north: {
 			imageUrl: string,
 			description: string,
@@ -34,47 +88,47 @@ export class Node extends Base {
 	};
 	coverIdx: number;
 	howManyFit: number;
-	rewards: Reward[];
-	hazards: Hazard[];
+	rewards: NodeReward[];
+	hazards: NodeHazard[];
 
 	constructor(data = null) {
 		super(data);
 		this.type = (data && data.type ? data.type : NodeType.Unknown);
 
-		this.appearance.north.imageUrl =
+		this.looking.north.imageUrl =
 			(data && data.appearance && data.appearance.north && data.appearance.north.imageUrl
 				? data.appearance.north.imageUrl : '');
-		this.appearance.north.description =
+		this.looking.north.description =
 			(data && data.appearance && data.appearance.north && data.appearance.north.description
 				? data.appearance.north.description : '');
-		this.appearance.east.imageUrl =
+		this.looking.east.imageUrl =
 			(data && data.appearance && data.appearance.east && data.appearance.east.imageUrl
 				? data.appearance.east.imageUrl : '');
-		this.appearance.east.description =
+		this.looking.east.description =
 			(data && data.appearance && data.appearance.east && data.appearance.east.description
 				? data.appearance.east.description : '');
-		this.appearance.south.imageUrl =
+		this.looking.south.imageUrl =
 			(data && data.appearance && data.appearance.south && data.appearance.south.imageUrl
 				? data.appearance.south.imageUrl : '');
-		this.appearance.south.description =
+		this.looking.south.description =
 			(data && data.appearance && data.appearance.south && data.appearance.south.description
 				? data.appearance.south.description : '');
-		this.appearance.west.imageUrl =
+		this.looking.west.imageUrl =
 			(data && data.appearance && data.appearance.west && data.appearance.west.imageUrl
 				? data.appearance.west.imageUrl : '');
-		this.appearance.west.description =
+		this.looking.west.description =
 			(data && data.appearance && data.appearance.west && data.appearance.west.description
 				? data.appearance.west.description : '');
-		this.appearance.up.imageUrl =
+		this.looking.up.imageUrl =
 			(data && data.appearance && data.appearance.up && data.appearance.up.imageUrl
 				? data.appearance.up.imageUrl : '');
-		this.appearance.up.description =
+		this.looking.up.description =
 			(data && data.appearance && data.appearance.up && data.appearance.up.description
 				? data.appearance.up.description : '');
-		this.appearance.down.imageUrl =
+		this.looking.down.imageUrl =
 			(data && data.appearance && data.appearance.down && data.appearance.down.imageUrl
 				? data.appearance.down.imageUrl : '');
-		this.appearance.down.description =
+		this.looking.down.description =
 			(data && data.appearance && data.appearance.down && data.appearance.down.description
 				? data.appearance.down.description : '');
 
@@ -89,35 +143,24 @@ export class Node extends Base {
 		return errors;
 	}
 
-	static create(model: Node): string[] {
-		// Add code to create and save here...
-		return Node.validate(model);
-	}
-
-	static readById(id: string): Node {
-		const node = new Node();
-		return node;
-	}
-
-	static update(model: Node): string[] {
-		// Add code to update and save here...
-		return Node.validate(model);
-	}
-
-	static delete(id: string)  {
-		// Add code to mark deleted here...
-	}
-
 	docify(): any {
+		const rewards: string[] = [];
+		this.rewards.forEach(reward => {
+			rewards.push(reward.docify());
+		});
+		const hazards: string[] = [];
+		this.hazards.forEach(hazard => {
+			hazards.push(hazard.docify());
+		});
 		const data = super.docify();
 		data.type = this.type;
-		data.appearance = this.appearance;
+		data.appearance = this.looking;
 		data.coverIdx = this.coverIdx;
 		data.howManyFit = this.howManyFit;
-		data.rewards = this.rewards;
-		data.hazards = this.hazards;
+		data.rewards = rewards;
+		data.hazards = hazards;
 		return data;
 	}
 
-}
+} // end class Node
 

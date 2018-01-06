@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
-import { User } from '../model/user';
+import { User } from '../core/user.interface';
 
 @Injectable()
 export class UserService {
@@ -32,7 +32,6 @@ export class UserService {
 		const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 		const data: User = {
 			uid: user.uid,
-			handle: user.handle,
 			email: user.email,
 			photoURL: user.photoURL,
 			roles: {

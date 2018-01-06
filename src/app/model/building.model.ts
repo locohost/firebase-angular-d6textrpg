@@ -21,25 +21,6 @@ export class Building extends Base {
 		return errors;
 	}
 
-	static create(model: Building): string[] {
-		// Add code to create and save here...
-		return Building.validate(model);
-	}
-
-	static readById(id: string): Building {
-		const building = new Building();
-		return building;
-	}
-
-	static update(model: Building): string[] {
-		// Add code to update and save here...
-		return Building.validate(model);
-	}
-
-	static delete(id: string)  {
-		// Add code to mark deleted here...
-	}
-
 	docify(): any {
 		const rooms: string[] = [];
 		this.rooms.forEach(room => {

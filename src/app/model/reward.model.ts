@@ -6,6 +6,16 @@ import { CharReputation } from '../enum/all.enum';
 import { Coins } from './misc.model';
 
 export class Reward extends Base {
+	type: RewardType;
+	spell: Spell;
+	items: Item[];
+	coins: Coins;
+	knowledge: string;
+	experience: number;
+	stat: string;
+	statIncrease: number;
+	repIncrease: number;
+	repNew: CharReputation;
 
 	constructor(data = null) {
 		super(data);
@@ -15,32 +25,12 @@ export class Reward extends Base {
 		const errors: string[] = [];
 		return errors;
 	}
-
-	static create(model: Reward): string[] {
-		// Add code to create and save here...
-		return Reward.validate(model);
-	}
-
-	static readById(id: string): Reward {
-		const reward = new Reward();
-		return reward;
-	}
-
-	static update(model: Reward): string[] {
-		// Add code to update and save here...
-		return Reward.validate(model);
-	}
-
-	static delete(id: string) {
-		// Add code to mark deleted here...
-	}
-
 	docify(): any {
 		const data = super.docify();
 		return data;
 	}
 
-}
+} // end class Reward
 
 export class RewardMagic extends Reward {
 	spell: Spell;
@@ -54,12 +44,13 @@ export class RewardMagic extends Reward {
 
 	}
 
-	docify() {
-		const data = super.docify();
-		data.spell = this.spell;
-		return data;
+	docify(): any {
+		const doc = super.docify();
+		doc.spell = this.spell;
+		return doc;
 	}
-}
+
+} // end class RewardMagic
 
 export class RewardTreasure extends Reward {
 	items: Item[];
@@ -75,13 +66,14 @@ export class RewardTreasure extends Reward {
 
 	}
 
-	docify() {
-		const data = super.docify();
-		data.items = this.items;
-		data.coins = this.coins;
-		return data;
+	docify(): any {
+		const doc = super.docify();
+		doc.items = this.items;
+		doc.coins = this.coins;
+		return doc;
 	}
-}
+
+} // end class RewardTreasure
 
 export class RewardKnowledge extends Reward {
 	knowledge: string;
@@ -95,12 +87,13 @@ export class RewardKnowledge extends Reward {
 
 	}
 
-	docify() {
-		const data = super.docify();
-		data.knowledge = this.knowledge;
-		return data;
+	docify(): any {
+		const doc = super.docify();
+		doc.knowledge = this.knowledge;
+		return doc;
 	}
-}
+
+} // end class RewardKnowledge
 
 export class RewardExperience extends Reward {
 	experience: number;
@@ -114,12 +107,13 @@ export class RewardExperience extends Reward {
 
 	}
 
-	docify() {
-		const data = super.docify();
-		data.experience = this.experience;
-		return data;
+	docify(): any {
+		const doc = super.docify();
+		doc.experience = this.experience;
+		return doc;
 	}
-}
+
+} // end class RewardExperience
 
 export class RewardStats extends Reward {
 	stat: string;
@@ -127,19 +121,22 @@ export class RewardStats extends Reward {
 
 	constructor(data) {
 		super(data);
+		this.stat = data.stat;
+		this.statIncrease = data.statIncrease;
 	}
 
 	static playerTrigger(reward: RewardStats, player: Player) {
 
 	}
 
-	docify() {
-		const data = super.docify();
-		data.stat = this.stat;
-		data.statIncrease = this.statIncrease;
-		return data;
+	docify(): any {
+		const doc = super.docify();
+		doc.stat = this.stat;
+		doc.statIncrease = this.statIncrease;
+		return doc;
 	}
-}
+
+} // end class RewardStats
 
 export class RewardReputation extends Reward {
 	repIncrease: number;
@@ -147,16 +144,19 @@ export class RewardReputation extends Reward {
 
 	constructor(data) {
 		super(data);
+		this.repIncrease = (data.repIncrease || -1);
+		this.repNew = (data.repNew || CharReputation.Unknown);
 	}
 
 	static playerTrigger(reward: RewardReputation, player: Player) {
 
 	}
 
-	docify() {
-		const data = super.docify();
-		data.repIncrease = this.repIncrease;
-		data.repNew = this.repNew;
-		return data;
+	docify(): any {
+		const doc = super.docify();
+		doc.repIncrease = this.repIncrease;
+		doc.repNew = this.repNew;
+		return doc;
 	}
-}
+
+} // end class RewardReputation

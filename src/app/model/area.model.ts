@@ -12,38 +12,19 @@ export class Area extends Base {
 	coverIdx: number;
 	elevation: number;
 
-	constructor(data = null) {
+	constructor(data) {
 		super(data);
-		this.type = (data && data.type ? data.type : AreaType.Unknown);
-		this.region = (data && data.region ? data.region : null);
-		this.buildings = (data && data.buildings ? data.buildings : []);
-		this.nodes = (data && data.nodes ? data.nodes : []);
-		this.coverIdx = (data && data.coverIdx ? data.coverIdx : 0);
-		this.elevation = (data && data.elevation ? data.elevation : 0);
+		this.type = (data.type || AreaType.Unknown);
+		this.region = (data.region || null);
+		this.buildings = (data.buildings || []);
+		this.nodes = (data.nodes || []);
+		this.coverIdx = (data.coverIdx || 0);
+		this.elevation = (data.elevation || 0);
 	}
 
 	static validate(model: Area): string[] {
 		const errors: string[] = [];
 		return errors;
-	}
-
-	static create(model: Area): string[] {
-		// Add code to create and save here...
-		return Area.validate(model);
-	}
-
-	static readById(id: string): Area {
-		const area = new Area();
-		return area;
-	}
-
-	static update(model: Area): string[] {
-		// Add code to update and save here...
-		return Area.validate(model);
-	}
-
-	static delete(id: string)  {
-		// Add code to mark deleted here...
 	}
 
 	docify(): any {

@@ -202,25 +202,6 @@ export abstract class CharNPCBase extends Base {
 		return errors;
 	}
 
-	static create(model: CharNPCBase): string[] {
-		// Add code to create and save here...
-		return Character.validate(model);
-	}
-
-	static readById(id: string): CharNPCBase {
-		const char = new Character({});
-		return char;
-	}
-
-	static update(model: CharNPCBase): string[] {
-		// Add code to update and save here...
-		return Character.validate(model);
-	}
-
-	static delete(id: string) {
-		// Add code to mark deleted here...
-	}
-
 	docify() {
 		const doc = super.docify();
 		doc.location = this.location;
@@ -312,8 +293,8 @@ export class NPCKnowsNPC {
 			phrases.push(phrase.docify());
 		});
 		return {
-			'npcUID': this.npc.uid,
-			'npcName': this.npc.name,
+			'npcUID': (!!this.npc ? this.npc.uid : ''),
+			'npcName': (!!this.npc ? this.npc.name : ''),
 			'phrases': phrases
 		};
 	}
@@ -335,8 +316,8 @@ export class NPCKnowsChar {
 			phrases.push(phrase.docify());
 		});
 		return {
-			'charUID': this.char.uid,
-			'charName': this.char.name,
+			'charUID': (!!this.char ? this.char.uid : ''),
+			'charName': (!!this.char ? this.char.name : ''),
 			'phrases': phrases
 		};
 	}
@@ -368,16 +349,16 @@ export class NPC extends CharNPCBase {
 
 	docify() {
 		const unknownPhrases: string[] = [];
-		this.unknownPhrases.forEach(phrase => {
-			unknownPhrases.push(phrase.docify());
+		this.unknownPhrases.forEach(p => {
+			unknownPhrases.push(p.docify());
 		});
 		const knownNPCs: string[] = [];
-		this.knownNPCs.forEach(phrase => {
-			knownNPCs.push(phrase.docify());
+		this.knownNPCs.forEach(n => {
+			knownNPCs.push(n.docify());
 		});
 		const knownChars: string[] = [];
-		this.knownChars.forEach(phrase => {
-			knownChars.push(phrase.docify());
+		this.knownChars.forEach(c => {
+			knownChars.push(c.docify());
 		});
 		const doc = super.docify();
 		doc.type = this.type;
@@ -410,7 +391,9 @@ export class Character extends CharNPCBase {
 
 	docify() {
 		const doc = super.docify();
-		doc.player = this.player;
+		doc.playerUID = (!!this.player ? this.player.uid : '');
+		doc.playerHandle = (!!this.player ? this.player.handle : '');
+		doc.playerName = (!!this.player ? this.player.name : '');
 		doc.warnings = this.warnings;
 		doc.suspended = this.suspended;
 		doc.suspendReason = this.suspendReason;

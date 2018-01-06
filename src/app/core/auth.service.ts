@@ -5,7 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { switchMap } from 'rxjs/operators';
-import { User } from '../model/user';
+import { User } from './user.interface';
 
 @Injectable()
 export class AuthService {
@@ -61,7 +61,7 @@ export class AuthService {
 			});
 	}
 
-	private updateUserData(user) {
+	private updateUserData(user: User) {
 		// Sets user data to firestore on login
 		// debugger;
 		const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);

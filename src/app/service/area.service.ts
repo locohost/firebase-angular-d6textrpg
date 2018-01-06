@@ -33,7 +33,7 @@ export class AreaService {
 
 	update(area: Area) {
 		const docRef: AngularFirestoreDocument<Area> = this.afs.doc(`areas/${area.uid}`);
-		const data = area.getJSON();
+		const data = area.docify();
 		return docRef.set(data, { merge: true });
 	}
 
