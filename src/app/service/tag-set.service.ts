@@ -1,70 +1,40 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Player } from '../interface/player.interface';
+import { TagSet } from '../interface/tag-set.interface';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class PlayerService {
-	players: Observable<Player[]>;
-	player: Observable<Player>;
-
-	private dbCollName: string = 'players';
-	private dbCollection: AngularFirestoreCollection<Player>;
-	private dbDocument: AngularFirestoreDocument<Player>;
+export class TagSetService {
+	tagSets$: Observable<TagSet[]>;
+	tagSet$: Observable<TagSet>;
+	dbCollName: string = 'tag-sets';
+	dbCollection: AngularFirestoreCollection<TagSet>;
+	dbDocument: AngularFirestoreDocument<TagSet>;
 
 	constructor(private afs: AngularFirestore) { }
-
-	create(model: Player): Promise<Player[]> {
-		this.dbCollection = this.afs.collection(this.dbCollName);
-		this.dbCollection.add(model);
-		return this.dbCollection.valueChanges(['added']).toPromise() as Promise<Player[]>;
-	}
 
 	readAll() {
 		this.dbCollection = this.afs.collection(this.dbCollName, ref => {
 			return ref.where('deleted', '==', false);
 		});
-		this.players = this.dbCollection.valueChanges();
+		this.tagSets$ = this.dbCollection.valueChanges();
 	}
 
-	readByUID(uid: string) {
+	readByCollection(collName: string) {
 		this.dbCollection = this.afs.collection(this.dbCollName, ref => {
 			return ref.where('deleted', '==', false)
-					.where('uid', '==', uid);
+				.where('collection', '==', collName);
 		});
-		this.player = this.dbCollection[0].valueChanges();
+		this.tagSets$ = this.dbCollection.valueChanges();
 	}
 
-	readByUserUID(userUID: string) {
+	readByCollectionAndAttrib(collName: string, attribName: string) {
 		this.dbCollection = this.afs.collection(this.dbCollName, ref => {
 			return ref.where('deleted', '==', false)
-					.where('userUID', '==', userUID);
+				.where('collection', '==', collName)
+				.where('attrib', '==', attribName);
 		});
-		this.player = this.dbCollection[0].valueChanges();
-	}
-
-	readByHandle(handle: string) {
-		this.dbCollection = this.afs.collection(this.dbCollName, ref => {
-			return ref.where('deleted', '==', false)
-					.where('handle', '==', handle);
-		});
-		this.player = this.dbCollection[0].valueChanges();
-	}
-
-	update(model: Player) {
-		this.dbDocument = this.afs.doc(`${this.dbCollName}/${model.uid}`);
-		model.modifiedOn = new Date();
-		model.modifiedBy = 'WebUI';
-		model.modifiedLastIP = 'Get.My.IP.Later';
-		this.dbDocument.update(model);
-		this.player = this.dbDocument.valueChanges();
-	}
-
-	delete(model: Player) {
-		model.deleted = true;
-		model.deletedOn = new Date();
-		model.deletedBy = 'WebUI';
-		this.update(model);
+		this.tagSets$ = this.dbCollection.valueChanges();
 	}
 
 }

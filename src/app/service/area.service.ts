@@ -1,44 +1,47 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
-import { Area } from '../interface/area.interface';
+import { DropDown } from '../interface/area.interface';
 
 @Injectable()
 export class AreaService {
+	dbCollName: string = 'areas';
+	dbCollection: AngularFirestoreCollection<DropDown>;
+	dbDocument: AngularFirestoreDocument<DropDown>;
 
-	AreaCollection: AngularFirestoreCollection<Area>;
-	Areas: Observable<Area[]>;
+	constructor(private afs: AngularFirestore) { }
 
-	constructor(
-		private afs: AngularFirestore
-	) { }
-
-	create(model: Area) {
-
+	create(model: DropDown): Promise<DropDown[]> {
+		this.dbCollection = this.afs.collection<DropDown>(this.dbCollName);
+		this.dbCollection.add(model);
+		return this.dbCollection.valueChanges(['added']).toPromise() as Promise<DropDown[]>;
 	}
 
-	readByUID(uid: string) {
-		this.AreaCollection = this.afs.collection<Area>('areas', ref => {
-			return ref.where('uid', '==', uid);
+	readAll(): Promise<DropDown[]> {
+		this.dbCollection = this.afs.collection<DropDown>(this.dbCollName, ref => {
+			return ref.where('deleted', '==', false);
 		});
-		this.Areas = this.AreaCollection.valueChanges();
+		return this.dbCollection.valueChanges().toPromise() as Promise<DropDown[]>;
 	}
 
-	readByHandle(handle: string) {
-		this.AreaCollection = this.afs.collection<Area>('areas', ref => {
-			return ref.where('handle', '==', handle);
+	readByUID(uid: string): Promise<DropDown> {
+		this.dbCollection = this.afs.collection<DropDown>(this.dbCollName, ref => {
+			return ref.where('deleted', '==', false)
+					.where('uid', '==', uid);
 		});
-		this.Areas = this.AreaCollection.valueChanges();
+		return this.dbCollection[0].valueChanges().toPromise() as Promise<DropDown>;
 	}
 
-	update(area: Area) {
-		const docRef: AngularFirestoreDocument<Area> = this.afs.doc(`areas/${area.uid}`);
-		const data = area.docify();
-		return docRef.set(data, { merge: true });
+	update(model: DropDown): Promise<DropDown> {
+		this.dbDocument = this.afs.doc<DropDown>(`${this.dbCollName}/${model.uid}`);
+		this.dbDocument.update(model);
+		return this.dbDocument.valueChanges().toPromise() as Promise<DropDown>;
 	}
 
-	delete(id: string) {
-
+	delete(model: DropDown): Promise<DropDown> {
+		model.deleted = true;
+		model.deletedOn = new Date();
+		model.deletedBy = 'WebUI';
+		return this.update(model);
 	}
 
 }

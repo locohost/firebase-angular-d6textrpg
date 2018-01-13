@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { SuperSecretComponent } from './super-secret/super-secret.component';
-import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
+import { SuperSecretComponent } from '../component/super-secret/super-secret.component';
+import { SubscriberPageComponent } from '../component/subscriber-page/subscriber-page.component';
 
-import { AdminGuard } from './core/admin.guard';
-import { CanReadGuard } from './core/can-read.guard';
+import { AdminGuard } from './admin.guard';
+import { CanReadGuard } from './can-read.guard';
 
 
 const routes: Routes = [

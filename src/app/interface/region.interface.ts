@@ -1,12 +1,12 @@
 import { Base } from './base.interface';
 import { World } from './world.interface';
-import { Area } from './area.interface';
+import { DropDown } from './area.interface';
 import { RegionType } from '../enum/all.enum';
 
 export interface Region extends Base {
 	type: RegionType;
 	world: World;
-	areas: Area[];
+	areas: DropDown[];
 	inhabitants: string;
 	economy: string;
 	climate: string;

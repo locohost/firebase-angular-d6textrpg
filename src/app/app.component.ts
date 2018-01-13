@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './core/auth.service';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Player } from './interface/player.interface';
+import { PlayerService } from './service/player.service';
+import { DropDownComponent } from './component/drop-down/drop-down.component';
+
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'app-root',
+	providers: [PlayerService, DropDownComponent],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
@@ -13,8 +15,10 @@ export class AppComponent implements OnInit {
 	answer: string = '';
 	answerDisplay: string = '';
 	showSpinner: boolean = false;
+	// players: Player[];
+	players: Observable<Player[]>;
 
-	constructor() { }
+	constructor(private playerService: PlayerService) { }
 
 	showAnswer() {
 		this.answerDisplay = '';
@@ -25,6 +29,9 @@ export class AppComponent implements OnInit {
 		}, 2000);
 	}
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.playerService.readAll();
+		this.players = this.playerService.players;
+	}
 
 }

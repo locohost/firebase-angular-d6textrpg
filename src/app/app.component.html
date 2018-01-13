@@ -1,28 +1,47 @@
 <div class="content">
-	<mat-toolbar color="primary">
-		<mat-toolbar-row>
-			<span>d6TextRPG</span>
+	<p>
+		<mat-toolbar color="primary">
+			<mat-toolbar-row>
+				<span>d6TextRPG</span>
+		
+				<span class="example-spacer"></span>
+		
+				<button mat-button>About</button>
+				<button mat-button>Services</button>
+				<button mat-button>Contact</button>
 	
-			<span class="example-spacer"></span>
-	
-			<button mat-button>About</button>
-			<button mat-button>Services</button>
-			<button mat-button>Contact</button>
+			</mat-toolbar-row>
+		</mat-toolbar>
+	</p>
 
-		</mat-toolbar-row>
-	</mat-toolbar>
+	<p>
+		<mat-card>
+			<mat-form-field>
+				<input matInput [(ngModel)]="answer" placeholder="Who has the best dev tutorials?">
+			</mat-form-field><br>
+			<button mat-raised-button (click)="showAnswer()">Answer me</button>
+			<mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+		</mat-card>
+	</p>
 
-	<mat-card>
-		<mat-form-field>
-			<input matInput [(ngModel)]="answer" placeholder="Who has the best dev tutorials?">
-		</mat-form-field><br>
-		<button mat-raised-button (click)="showAnswer()">Answer me</button>
-		<mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
-	</mat-card>
+	<p>
+		<mat-card *ngIf="answerDisplay">
+			<h1>{{ answerDisplay }}, you're damn right!</h1>
+		</mat-card>
+	</p>
 
-	<mat-card *ngIf="answerDisplay">
-		<h1>{{ answerDisplay }}, you're damn right!</h1>
-	</mat-card><br>
+	<p>
+		<app-drop-down [id]="'d6-food-id'" [collection]="'d6-food-coll'" [attrib]="'d6-food-attrib'"></app-drop-down>
+	</p>
+
+	<p>
+		<mat-card>
+			<h3>Players</h3>
+			<ul *ngFor="let player of players | async" class="collection">
+				<li class="collection-item">{{player.handle}}: {{player.name}}</li>
+			</ul>
+		</mat-card>
+	</p>
 
 	<user-login></user-login>
 	<router-outlet></router-outlet>

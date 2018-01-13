@@ -1,29 +1,32 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './core/app-routing.module';
 import { CoreModule } from './core/core.module';
-import { AppComponent } from './app.component';
+import { MaterialModule } from './core/material.module';
 import { environment } from '../environments/environment';
+import { AppComponent } from './app.component';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-import { SuperSecretComponent } from './super-secret/super-secret.component';
-import { UserLoginComponent } from './user-login/user-login.component';
-import { SubscriberPageComponent } from './subscriber-page/subscriber-page.component';
+import { SuperSecretComponent } from './component/super-secret/super-secret.component';
+import { UserLoginComponent } from './component/user-login/user-login.component';
+import { SubscriberPageComponent } from './component/subscriber-page/subscriber-page.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
+import { DropDownComponent } from './component/drop-down/drop-down.component';
+import { TagSetService } from './service/tag-set.service';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		SuperSecretComponent,
 		UserLoginComponent,
-		SubscriberPageComponent
+		SubscriberPageComponent,
+		DropDownComponent
 	],
 	imports: [
 		BrowserModule,
@@ -36,7 +39,7 @@ import { FormsModule } from '@angular/forms';
 		AngularFirestoreModule,
 		AngularFireAuthModule
 	],
-	providers: [],
+	providers: [TagSetService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
