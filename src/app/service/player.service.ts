@@ -89,7 +89,7 @@ export class PlayerService {
 	Retrieving nested collections
 
 	Nesting collections is a great way to structure your data. This allows you to group related data
-	structures together. If you are creating a "Task List" site, you can group "tasks" under a 
+	structures together. If you are creating a "Task List" site, you can group "tasks" under a
 	user: user/<uid>/tasks.
 
 	To retrieve a nested collection use the collection(path: string) method.

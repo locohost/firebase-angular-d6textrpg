@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/fires
 import { AuthService } from '../../core/auth.service';
 
 @Component({
-	selector: 'subscriber-page',
+	selector: 'app-subscriber-page',
 	templateUrl: './subscriber-page.component.html',
 	styleUrls: ['./subscriber-page.component.css']
 })

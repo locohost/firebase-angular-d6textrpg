@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-	selector: 'super-secret',
+	selector: 'app-super-secret',
 	templateUrl: './super-secret.component.html',
 	styleUrls: ['./super-secret.component.css']
 })
