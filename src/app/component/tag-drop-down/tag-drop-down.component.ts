@@ -33,6 +33,12 @@ export class TagDropDownComponent implements OnInit {
 		this.selectionChange.emit(e);
 	}
 
+	placeHolder(): string {
+		let first = this.attrib.substr(0, 1);
+		first = first.toUpperCase();
+		return first + this.attrib.substr(1).toLowerCase();
+	}
+
 	ngOnInit() {
 		this.tags = [];
 		this.tagService.readByCollectionAndAttrib(this.collection, this.attrib);
@@ -45,8 +51,8 @@ export class TagDropDownComponent implements OnInit {
 			this.tags = this.tags.sort(function (a, b) {
 				return (
 					a.text.toUpperCase() === b.text.toUpperCase()
-					? 0
-					: (a.text.toUpperCase() < b.text.toUpperCase() ? -1 : 1)
+						? 0
+						: (a.text.toUpperCase() < b.text.toUpperCase() ? -1 : 1)
 				);
 			});
 		});
