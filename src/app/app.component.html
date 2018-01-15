@@ -31,7 +31,11 @@
 	</p>
 
 	<p>
-		<app-drop-down [id]="'d6-food-id'" [collection]="'d6-food-coll'" [attrib]="'d6-food-attrib'"></app-drop-down>
+		<app-tag-drop-down [id]="'buildingType'" 
+			[collection]="'buildings'" 
+			[attrib]="'type'" 
+			(selectionChange)="selectChanged($event)">
+		</app-tag-drop-down>
 	</p>
 
 	<p>
@@ -43,6 +47,6 @@
 		</mat-card>
 	</p>
 
-	<user-login></user-login>
+	<app-user-login></app-user-login>
 	<router-outlet></router-outlet>
 </div>

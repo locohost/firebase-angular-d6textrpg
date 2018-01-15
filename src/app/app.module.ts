@@ -17,7 +17,7 @@ import { SubscriberPageComponent } from './component/subscriber-page/subscriber-
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { DropDownComponent } from './component/drop-down/drop-down.component';
+import { TagDropDownComponent } from './component/tag-drop-down/tag-drop-down.component';
 import { TagSetService } from './service/tag-set.service';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { TagSetService } from './service/tag-set.service';
 		SuperSecretComponent,
 		UserLoginComponent,
 		SubscriberPageComponent,
-		DropDownComponent
+		TagDropDownComponent
 	],
 	imports: [
 		BrowserModule,

@@ -34,7 +34,11 @@ export class TagSetService {
 				.where('collection', '==', collName)
 				.where('attrib', '==', attribName);
 		});
+		// this.tagSet$ = Observable.of({ 'attrib': '', 'collection': '', 'tags': [] } as TagSet);
 		this.tagSets$ = this.dbCollection.valueChanges();
+		// this.tagSets$.subscribe(tags => {
+		// 	this.tagSet$ = Observable.of(tags[0]);
+		// });
 	}
 
 }

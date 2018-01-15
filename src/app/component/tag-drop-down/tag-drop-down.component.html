@@ -1,0 +1,7 @@
+<mat-form-field>
+	<mat-select placeholder="{{ attrib }}" (selectionChange)="selectChanged($event)">
+		<mat-option *ngFor="let tag of tags" [value]="tag?.value">
+			{{ tag?.text }}
+		</mat-option>
+	</mat-select>
+</mat-form-field>

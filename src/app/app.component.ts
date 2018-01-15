@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from './interface/player.interface';
 import { PlayerService } from './service/player.service';
-import { DropDownComponent } from './component/drop-down/drop-down.component';
-
+// import { DropDownComponent } from './component/drop-down/drop-down.component';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'app-root',
-	providers: [PlayerService, DropDownComponent],
+	providers: [PlayerService],
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.css']
 })
@@ -19,6 +18,11 @@ export class AppComponent implements OnInit {
 	players: Observable<Player[]>;
 
 	constructor(private playerService: PlayerService) { }
+
+	selectChanged(e: any) {
+		console.log('app.comp: selectChanged: e: ', e);
+		console.log('app.comp: selectChanged: e.viewValue: ', e.source.selected.viewValue);
+	}
 
 	showAnswer() {
 		this.answerDisplay = '';
