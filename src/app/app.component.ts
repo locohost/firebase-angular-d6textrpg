@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 	constructor(private playerService: PlayerService) { }
 
 	selectChanged(e: any) {
+		console.log('app.comp: selectChanged: e.selectId: ', e.selectId);
 		console.log('app.comp: selectChanged: e.value: ', e.value);
 		console.log('app.comp: selectChanged: e.viewValue: ', e.source.selected.viewValue);
 	}

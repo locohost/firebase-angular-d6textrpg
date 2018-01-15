@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { TagSet } from '../../interface/tag-set.interface';
-import { TagSetService } from '../../service/tag-set.service';
+import { TagSet } from '../../../interface/tag-set.interface';
+import { TagSetService } from '../../../service/tag-set.service';
 import { Observable } from 'rxjs/Observable';
 import { MatSelectChange } from '@angular/material';
 
@@ -10,11 +10,11 @@ export interface TagSelectOption {
 }
 
 @Component({
-	selector: 'app-tag-drop-down',
-	templateUrl: './tag-drop-down.component.html',
-	styleUrls: ['./tag-drop-down.component.css']
+	selector: 'app-tag-select',
+	templateUrl: './tag-select.component.html',
+	styleUrls: ['./tag-select.component.css']
 })
-export class TagDropDownComponent implements OnInit {
+export class TagSelectComponent implements OnInit {
 	@Input()
 	id: string = '';
 	@Input()

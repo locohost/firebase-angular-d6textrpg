@@ -17,8 +17,10 @@ import { SubscriberPageComponent } from './component/subscriber-page/subscriber-
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { TagDropDownComponent } from './component/tag-drop-down/tag-drop-down.component';
+import { TagSelectComponent } from './component/form-component/tag-select/tag-select.component';
 import { TagSetService } from './service/tag-set.service';
+import { CharacterForm } from './component/form/character-form/character.form';
+import { CollectionSelectComponent } from './component/form-component/collection-select/collection-select.component';
 
 @NgModule({
 	declarations: [
@@ -26,7 +28,9 @@ import { TagSetService } from './service/tag-set.service';
 		SuperSecretComponent,
 		UserLoginComponent,
 		SubscriberPageComponent,
-		TagDropDownComponent
+		TagSelectComponent,
+		CharacterForm,
+		CollectionSelectComponent
 	],
 	imports: [
 		BrowserModule,
