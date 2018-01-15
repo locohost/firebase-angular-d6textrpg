@@ -1,13 +1,8 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { TagSet } from '../../../interface/tag-set.interface';
 import { TagSetService } from '../../../service/tag-set.service';
+import { SelectOption } from '../../../interface/select-option.interface';
 import { Observable } from 'rxjs/Observable';
 import { MatSelectChange } from '@angular/material';
-
-export interface TagSelectOption {
-	value: string;
-	text: string;
-}
 
 @Component({
 	selector: 'app-tag-select',
@@ -24,7 +19,7 @@ export class TagSelectComponent implements OnInit {
 	@Output()
 	selectionChange: EventEmitter<MatSelectChange> = new EventEmitter<MatSelectChange>();
 
-	tags: TagSelectOption[] = [];
+	tags: SelectOption[] = [];
 
 	constructor(private tagService: TagSetService) { }
 
@@ -33,7 +28,7 @@ export class TagSelectComponent implements OnInit {
 		this.selectionChange.emit(e);
 	}
 
-	placeHolder(): string {
+	placeHolderText(): string {
 		let first = this.attrib.substr(0, 1);
 		first = first.toUpperCase();
 		return first + this.attrib.substr(1).toLowerCase();

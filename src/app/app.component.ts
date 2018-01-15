@@ -13,13 +13,14 @@ export class AppComponent implements OnInit {
 	answer: string = '';
 	answerDisplay: string = '';
 	showSpinner: boolean = false;
-	players: Observable<Player[]>;
 
-	constructor(private playerService: PlayerService) { }
+	constructor(
+		public playerService: PlayerService
+	) { }
 
 	selectChanged(e: any) {
 		console.log('app.comp: selectChanged: e.selectId: ', e.selectId);
-		console.log('app.comp: selectChanged: e.value: ', e.value);
+		console.log('app.comp: selectChanged: e.value: ', e.source.selected.value);
 		console.log('app.comp: selectChanged: e.viewValue: ', e.source.selected.viewValue);
 	}
 
@@ -34,7 +35,6 @@ export class AppComponent implements OnInit {
 
 	ngOnInit() {
 		this.playerService.readAll();
-		this.players = this.playerService.players;
 	}
 
 }

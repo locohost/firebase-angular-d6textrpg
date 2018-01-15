@@ -18,9 +18,10 @@ import { SubscriberPageComponent } from './component/subscriber-page/subscriber-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { TagSelectComponent } from './component/form-component/tag-select/tag-select.component';
+import { LinkedCollectionSelectComponent } from './component/form-component/linked-collection-select/linked-collection-select.component';
 import { TagSetService } from './service/tag-set.service';
+import { LinkedCollectionService } from './service/linked-collection.service';
 import { CharacterForm } from './component/form/character-form/character.form';
-import { CollectionSelectComponent } from './component/form-component/collection-select/collection-select.component';
 
 @NgModule({
 	declarations: [
@@ -30,7 +31,7 @@ import { CollectionSelectComponent } from './component/form-component/collection
 		SubscriberPageComponent,
 		TagSelectComponent,
 		CharacterForm,
-		CollectionSelectComponent
+		LinkedCollectionSelectComponent
 	],
 	imports: [
 		BrowserModule,
@@ -43,7 +44,7 @@ import { CollectionSelectComponent } from './component/form-component/collection
 		AngularFirestoreModule,
 		AngularFireAuthModule
 	],
-	providers: [TagSetService],
+	providers: [TagSetService, LinkedCollectionService],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

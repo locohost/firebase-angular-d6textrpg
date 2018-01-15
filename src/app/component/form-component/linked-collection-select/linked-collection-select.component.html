@@ -1,7 +1,7 @@
 <mat-form-field>
 	<mat-select placeholder="{{ placeHolderText() }}" (selectionChange)="selectChanged($event)">
-		<mat-option *ngFor="let tag of tags" [value]="tag?.value">
-			{{ tag?.text }}
+		<mat-option *ngFor="let option of selectOptions" [value]="option?.value">
+			{{ option?.text }}
 		</mat-option>
 	</mat-select>
 </mat-form-field>

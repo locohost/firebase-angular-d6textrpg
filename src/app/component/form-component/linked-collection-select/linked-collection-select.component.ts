@@ -1,30 +1,27 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { LinkedCollectionService } from '../../../service/linked-collection.service';
-import { LinkedSelect } from '../../../interface/linked-select.interface';
+import { SelectOption } from '../../../interface/select-option.interface';
 import { Observable } from 'rxjs/Observable';
 import { MatSelectChange } from '@angular/material';
 
-export interface LinkedCollection {
-	uid: string;
-	text: string;
-}
-
 @Component({
 	selector: 'app-collection-select',
-	templateUrl: './collection-select.component.html',
-	styleUrls: ['./collection-select.component.css']
+	templateUrl: './linked-collection-select.component.html',
+	styleUrls: ['./linked-collection-select.component.css']
 })
-export class CollectionSelectComponent implements OnInit {
+export class LinkedCollectionSelectComponent implements OnInit {
 	@Input()
 	id: string = '';
 	@Input()
 	collection: string = '';
 	@Input()
 	attrib: string = 'name';
+	@Input()
+	placeholder: string = '';
 	@Output()
 	selectionChange: EventEmitter<MatSelectChange> = new EventEmitter<MatSelectChange>();
 
-	selectOptions: LinkedSelect[] = [];
+	selectOptions: SelectOption[] = [];
 
 	constructor(private linkedCollectionService: LinkedCollectionService) { }
 
@@ -33,10 +30,10 @@ export class CollectionSelectComponent implements OnInit {
 		this.selectionChange.emit(e);
 	}
 
-	placeHolder(): string {
-		let first = this.attrib.substr(0, 1);
+	placeHolderText(): string {
+		let first = this.placeholder.substr(0, 1);
 		first = first.toUpperCase();
-		return first + this.attrib.substr(1).toLowerCase();
+		return first + this.placeholder.substr(1).toLowerCase();
 	}
 
 	ngOnInit() {
@@ -44,7 +41,7 @@ export class CollectionSelectComponent implements OnInit {
 		this.linkedCollectionService.readAll(this.collection, this.attrib);
 		this.linkedCollectionService.linkedDocs$.subscribe(docs => {
 			docs.forEach(doc => {
-				this.selectOptions.push({ 'uid': doc.id, 'text': doc[this.attrib] });
+				this.selectOptions.push({ 'value': doc.id, 'text': doc.data[this.attrib] });
 			});
 			// Sort the select options alphabetically by select text
 			this.selectOptions = this.selectOptions.sort(function (a, b) {
@@ -54,6 +51,7 @@ export class CollectionSelectComponent implements OnInit {
 						: (a.text.toUpperCase() < b.text.toUpperCase() ? -1 : 1)
 				);
 			});
+			const x = 0;
 		});
 	}
 

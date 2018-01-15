@@ -15,9 +15,15 @@ export class LinkedCollectionService {
 		this.dbCollection = this.afs.collection(collectionName, ref => {
 			return ref.where('deleted', '==', false).orderBy(order);
 		});
-		this.linkedDocs$ = this.dbCollection.valueChanges();
+		// this.linkedDocs$ = this.dbCollection.valueChanges();
+		this.linkedDocs$ = this.dbCollection.snapshotChanges().map(actions => {
+			return actions.map(action => {
+				const data = action.payload.doc.data();
+				const id = action.payload.doc.id;
+				return { id, data };
+			});
+		});
 	}
-
 }
 
 /*

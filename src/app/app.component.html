@@ -3,13 +3,13 @@
 		<mat-toolbar color="primary">
 			<mat-toolbar-row>
 				<span>d6TextRPG</span>
-		
+
 				<span class="example-spacer"></span>
-		
+
 				<button mat-button>About</button>
 				<button mat-button>Services</button>
 				<button mat-button>Contact</button>
-	
+
 			</mat-toolbar-row>
 		</mat-toolbar>
 	</p>
@@ -18,7 +18,8 @@
 		<mat-card>
 			<mat-form-field>
 				<input matInput [(ngModel)]="answer" placeholder="Who has the best dev tutorials?">
-			</mat-form-field><br>
+			</mat-form-field>
+			<br>
 			<button mat-raised-button (click)="showAnswer()">Answer me</button>
 			<mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
 		</mat-card>
@@ -31,17 +32,21 @@
 	</p>
 
 	<p>
-		<app-tag-select [id]="'buildingType'" 
-			[collection]="'buildings'" 
-			[attrib]="'type'" 
+		<app-tag-select [id]="'buildingType'" [collection]="'buildings'" [attrib]="'type'" 
 			(selectionChange)="selectChanged($event)">
 		</app-tag-select>
 	</p>
 
 	<p>
+		<app-collection-select [id]="'building'" [placeholder]="'Building'"
+			[collection]="'buildings'" [attrib]="'name'" (selectionChange)="selectChanged($event)">
+		</app-collection-select>
+	</p>
+
+	<p>
 		<mat-card>
 			<h3>Players</h3>
-			<ul *ngFor="let player of players | async" class="collection">
+			<ul *ngFor="let player of playerService.players | async" class="collection">
 				<li class="collection-item">{{player.handle}}: {{player.name}}</li>
 			</ul>
 		</mat-card>
