@@ -3,7 +3,7 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection 
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class LinkedCollectionService {
+export class LinkedDocService {
 	linkedDocs$: Observable<any[]>;
 	linkedDoc$: Observable<any>;
 	dbCollection: AngularFirestoreCollection<any>;

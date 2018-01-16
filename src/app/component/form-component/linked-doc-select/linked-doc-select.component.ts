@@ -1,15 +1,16 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
-import { LinkedCollectionService } from '../../../service/linked-collection.service';
+import { LinkedDocService } from '../../../service/linked-doc.service';
+import { ToolService } from '../../../service/tool.service';
 import { SelectOption } from '../../../interface/select-option.interface';
 import { Observable } from 'rxjs/Observable';
 import { MatSelectChange } from '@angular/material';
 
 @Component({
-	selector: 'app-collection-select',
-	templateUrl: './linked-collection-select.component.html',
-	styleUrls: ['./linked-collection-select.component.css']
+	selector: 'app-linked-doc-select',
+	templateUrl: './linked-doc-select.component.html',
+	styleUrls: ['./linked-doc-select.component.css']
 })
-export class LinkedCollectionSelectComponent implements OnInit {
+export class LinkedDocSelectComponent implements OnInit {
 	@Input()
 	id: string = '';
 	@Input()
@@ -23,7 +24,10 @@ export class LinkedCollectionSelectComponent implements OnInit {
 
 	selectOptions: SelectOption[] = [];
 
-	constructor(private linkedCollectionService: LinkedCollectionService) { }
+	constructor(
+		private linkedDocService: LinkedDocService,
+		private toolService: ToolService
+	) { }
 
 	selectChanged(e: MatSelectChange) {
 		e['selectId'] = this.id;
@@ -38,20 +42,12 @@ export class LinkedCollectionSelectComponent implements OnInit {
 
 	ngOnInit() {
 		this.selectOptions = [];
-		this.linkedCollectionService.readAll(this.collection, this.attrib);
-		this.linkedCollectionService.linkedDocs$.subscribe(docs => {
+		this.linkedDocService.readAll(this.collection, this.attrib);
+		this.linkedDocService.linkedDocs$.subscribe(docs => {
 			docs.forEach(doc => {
 				this.selectOptions.push({ 'value': doc.id, 'text': doc.data[this.attrib] });
 			});
-			// Sort the select options alphabetically by select text
-			this.selectOptions = this.selectOptions.sort(function (a, b) {
-				return (
-					a.text.toUpperCase() === b.text.toUpperCase()
-						? 0
-						: (a.text.toUpperCase() < b.text.toUpperCase() ? -1 : 1)
-				);
-			});
-			const x = 0;
+			this.selectOptions = this.toolService.sortArrayText(this.selectOptions);
 		});
 	}
 

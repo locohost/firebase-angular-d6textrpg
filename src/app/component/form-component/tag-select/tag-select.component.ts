@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { TagSetService } from '../../../service/tag-set.service';
+import { ToolService } from '../../../service/tool.service';
 import { SelectOption } from '../../../interface/select-option.interface';
 import { Observable } from 'rxjs/Observable';
 import { MatSelectChange } from '@angular/material';
@@ -21,7 +22,10 @@ export class TagSelectComponent implements OnInit {
 
 	tags: SelectOption[] = [];
 
-	constructor(private tagService: TagSetService) { }
+	constructor(
+		private tagService: TagSetService,
+		private toolService: ToolService
+	) { }
 
 	selectChanged(e: MatSelectChange) {
 		e['selectId'] = this.id;
@@ -38,18 +42,12 @@ export class TagSelectComponent implements OnInit {
 		this.tags = [];
 		this.tagService.readByCollectionAndAttrib(this.collection, this.attrib);
 		this.tagService.tagSets$.subscribe(tagSets => {
+			// this.tags = this.toolService.fillSelectOptions(tagSets[0].tags);
 			tagSets[0].tags.forEach(tag => {
 				const tags = tag.split('=');
 				this.tags.push({ 'value': tags[0], 'text': tags[1] });
 			});
-			// Sort the tags alphabetically by tagText
-			this.tags = this.tags.sort(function (a, b) {
-				return (
-					a.text.toUpperCase() === b.text.toUpperCase()
-						? 0
-						: (a.text.toUpperCase() < b.text.toUpperCase() ? -1 : 1)
-				);
-			});
+			this.tags = this.toolService.sortArrayText(this.tags);
 		});
 	}
 
